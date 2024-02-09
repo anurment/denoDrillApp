@@ -1,0 +1,9 @@
+<% layout("./layouts/layout.eta") %>
+
+<h3>Drill and Practice is an app that you can use for repeated practice of learned content</h3>
+
+<p>Number of topics: <%=it.ntopics.count%></p>
+<p>Number of questions: <%=it.nquestions.count%></p>
+<p>Number of question answers: <%=it.nanswers.count%></p>
+
+

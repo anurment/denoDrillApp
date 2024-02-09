@@ -1,0 +1,21 @@
+<% layout("./layouts/layout.eta") %>
+
+
+<% if (it.correctAnswers && it.correctAnswers.length > 0) {%>
+    <h3>Incorrect!</h3><br/>
+    <p>The correct option(s) was: </p>
+    <ul>
+    <% it.correctAnswers.forEach(answer => { %>    
+        <li>
+            <%=answer.option_text%>
+        </li>
+    <% }); %>
+    </ul>
+<%} else {%>
+<h3>Correct!</h3><br/>
+
+<%}%>
+
+<form action="/quiz/<%=it.tId%>" method="GET">
+    <input type="submit" value="Next question"  style="padding: 5px 5px; font-size:12px"/>
+</form>

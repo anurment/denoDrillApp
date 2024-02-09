@@ -1,0 +1,23 @@
+<% layout("./layouts/layout.eta") %>
+
+<% if (it.question.question_text && it.question.question_text.length > 0 && it.answerOptions && it.answerOptions.length > 0) {%>
+    <h3><%= it.question.question_text%></h3><br/>
+
+    <ul>
+        <%it.answerOptions.forEach(answerOption => { %>
+            <li>
+                <%= answerOption.option_text%>
+                <form action="/quiz/<%=it.question.topic_id%>/questions/<%=it.question.id%>/options/<%=answerOption.id%>" method="POST" style="display: inline-flex;" >
+                        <input type="submit" value="Choose"  style="padding: 5px 5px; font-size:12px"/>
+                </form>
+            </li>
+        <% }); %>
+        </ul>
+
+
+
+<% } else {%>
+
+    <p>No questions so far for this topic</p>
+
+<% } %>

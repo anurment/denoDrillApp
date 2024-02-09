@@ -1,0 +1,57 @@
+<% layout("./layouts/layout.eta") %>
+
+<a href="/topics/<%=it.question.topic_id%>">Back to questions</a>
+
+<h3>Question:</h3><br/>
+
+<p><%= it.question.question_text%>
+<% if (it.answerOptions.length < 1) {%>
+    <form action="/topics/<%=it.question.topic_id%>/questions/<%=it.question.id%>/delete" method="POST" style="display: inline-flex;" >
+                <input type="submit" value="Delete question"  style="padding: 5px 5px; font-size:12px"/>
+    </form>
+<% } %>
+</p> 
+
+<h4>Answer options: </h4>
+
+<% if (it.answerOptions && it.answerOptions.length > 0) {%>
+
+<ol>
+<% it.answerOptions.forEach(answerOption => { %>    
+    <li id="<%=answerOption.id%>">
+        <%= answerOption.option_text%> <%if (answerOption.is_correct) { %> &#9989; <%}%>
+        <form action="/topics/<%=it.question.topic_id%>/questions/<%=it.question.id%>/options/<%=answerOption.id%>/delete" method="POST" style="display: inline-flex;" >
+                <input type="submit" value="Delete option" id="deleteOption<%=answerOption.id%>" style="padding: 5px 5px; font-size:12px"/>
+        </form>
+    </li>
+<% }); %>
+</ol>
+
+<% } else {%>
+
+<p> No answer options yet! Add an option below.
+ Remember that questions that do not have any answer options will not appear in a quiz.
+</p>
+
+<% } %>
+
+<p>Add an answer option!</p>
+
+<% if (it.validationErrors) {%>
+<ul>
+    <% Object.keys(it.validationErrors).forEach((attribute) => { %>
+        <% Object.values(it.validationErrors[attribute]).forEach((err) => { %>
+            <li><%= err %></li>
+        <% }); %>
+    <% }); %>
+</ul>   
+
+<%}%>
+
+<form method="POST" action="/topics/<%=it.question.topic_id%>/questions/<%=it.question.id%>/options">
+Option text:<br/>
+<input type="text" name="option_text" value= "<%= it.text ? it.text : "" %>" />
+Correct answer:
+<input type="checkbox" name="is_correct" style="display: inline-flex;" />
+<input type="submit" value="Add"/>
+</form>
