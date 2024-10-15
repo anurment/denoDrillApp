@@ -2,7 +2,7 @@
 
 ## Web application for repeated practice of learned content
 
-### Prequisites:
+### Prerequisites:
 
 #### Docker and Docker Compose
 * The app requires [docker](https://www.docker.com/get-started/)
